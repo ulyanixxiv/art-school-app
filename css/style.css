@@ -1,0 +1,1017 @@
+/* ==========================================================================
+   Лабораторная работа № 5: Верстка мобильно-ориентированного веб-приложения
+   Тема: «Детская творческая школа "Арт-Умка"»
+   Архитектура: MOBILE FIRST (от мобильных < 480px к планшетам и десктопам)
+   Единицы измерения: относительные (rem, em, %, vw, vh)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS ПЕРЕМЕННЫЕ И ДИЗАЙН-ТОКЕНЫ
+   -------------------------------------------------------------------------- */
+:root {
+  --primary: #4F46E5;
+  --primary-hover: #4338CA;
+  --primary-light: #EEF2FF;
+  --accent: #F59E0B;
+  --accent-hover: #D97706;
+  --success: #10B981;
+  --success-light: #ECFDF5;
+  --danger: #EF4444;
+  --danger-light: #FEF2F2;
+
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  
+  --bg-page: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --bg-surface: #F1F5F9;
+
+  --border-color: #E2E8F0;
+  --border-radius-sm: 0.5rem;   /* 8px */
+  --border-radius-md: 0.875rem; /* 14px */
+  --border-radius-lg: 1.25rem;  /* 20px */
+  --border-radius-xl: 1.75rem;  /* 28px */
+
+  --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 0.5rem 1.25rem rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 1rem 2rem rgba(79, 70, 229, 0.12);
+
+  --transition-fast: 0.18s ease;
+  --transition-normal: 0.3s ease;
+}
+
+/* --------------------------------------------------------------------------
+   2. БАЗОВАЯ РЕЗИНОВАЯ ТИПОГРАФИКА И ОСНОВА (MOBILE FIRST)
+   -------------------------------------------------------------------------- */
+html {
+  font-size: 100%; /* 16px базовый размер для расчета rem */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 5rem; /* Отступ под мобильный нижний TabBar */
+}
+
+/* Резиновый гибкий контейнер */
+.container {
+  width: 100%;
+  max-width: 80rem; /* 1280px */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   3. ВЕРХНЯЯ ШАПКА И НАВИГАЦИЯ (<header>, <nav>)
+   -------------------------------------------------------------------------- */
+.site-header {
+  background-color: var(--bg-card);
+  border-bottom: 0.0625rem solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  background: linear-gradient(135deg, var(--primary) 0%, #8B5CF6 100%);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: #FFFFFF;
+}
+
+.brand-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.brand-subtitle {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Десктопное меню (скрыто на мобильных устройствах) */
+.desktop-nav {
+  display: none;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-header-cta {
+  display: none;
+}
+
+.btn-burger {
+  background: transparent;
+  border: 0.0625rem solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  padding: 0.5rem 0.75rem;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   4. НИЖНЯЯ ПАНЕЛЬ НАВИГАЦИИ ДЛЯ СМАРТФОНОВ (MOBILE BOTTOM TAB-BAR)
+   -------------------------------------------------------------------------- */
+.mobile-tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--bg-card);
+  border-top: 0.0625rem solid var(--border-color);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  z-index: 100;
+  box-shadow: 0 -0.25rem 1rem rgba(0, 0, 0, 0.05);
+}
+
+.tabbar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  transition: color var(--transition-fast);
+  cursor: pointer;
+}
+
+.tabbar-item .tab-icon {
+  font-size: 1.25rem;
+}
+
+.tabbar-item.active {
+  color: var(--primary);
+}
+
+/* --------------------------------------------------------------------------
+   5. ЛОГИЧЕСКИЕ ЭКРАНЫ ПРИЛОЖЕНИЯ (<main>)
+   -------------------------------------------------------------------------- */
+.app-screen {
+  display: none; /* Переключение экранов управляется через класс .active-screen */
+  animation: screenFadeIn 0.25s ease-out;
+}
+
+.app-screen.active-screen {
+  display: block;
+}
+
+@keyframes screenFadeIn {
+  from { opacity: 0; transform: translateY(0.5rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   6. ЭКРАН 1: ГЛАВНАЯ И КАТАЛОГ КУРСОВ
+   -------------------------------------------------------------------------- */
+/* Промо-баннер недели */
+.promo-hero {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.promo-card {
+  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+  border-radius: var(--border-radius-lg);
+  padding: 1.5rem 1.25rem;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.promo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #FEF08A;
+  width: fit-content;
+}
+
+.promo-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.promo-desc {
+  font-size: 0.875rem;
+  color: #E0E7FF;
+  line-height: 1.45;
+}
+
+.promo-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+
+.btn-promo-main {
+  background-color: var(--accent);
+  color: #0F172A;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--border-radius-md);
+  font-weight: 800;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.btn-promo-main:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-0.1rem);
+}
+
+.promo-art-icon {
+  display: none; /* Появится на планшетах/десктопе */
+}
+
+/* Фильтры направлений (горизонтальный скролл на мобильных) */
+.catalog-section {
+  margin-bottom: 2rem;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.section-heading {
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.filter-scroll {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-card);
+  border: 0.0625rem solid var(--border-color);
+  border-radius: 1.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-btn.active, .filter-btn:hover {
+  background-color: var(--primary);
+  color: #FFFFFF;
+  border-color: var(--primary);
+}
+
+/* Сетка карточек курсов на Flexbox */
+.courses-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.course-item {
+  background-color: var(--bg-card);
+  border: 0.0625rem solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.course-item:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: var(--shadow-lg);
+}
+
+.course-thumb {
+  height: 9.5rem;
+  background-color: #FEF3C7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  position: relative;
+}
+
+.thumb-pottery { background-color: #E0F2FE; }
+.thumb-anim { background-color: #FCE7F3; }
+.thumb-robot { background-color: #DCFCE7; }
+.thumb-theater { background-color: #EDE9FE; }
+.thumb-sculpt { background-color: #FFEDD5; }
+
+.course-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.course-tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.625rem;
+  align-items: center;
+}
+
+.pill-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--border-radius-sm);
+  letter-spacing: 0.025em;
+}
+
+.pill-age { background-color: var(--primary-light); color: var(--primary); }
+.pill-rating { background-color: #FEF3C7; color: var(--accent-hover); }
+
+.course-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.course-desc {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  line-height: 1.45;
+}
+
+.course-foot {
+  margin-top: auto;
+  padding-top: 0.875rem;
+  border-top: 0.0625rem solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-num {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.price-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.btn-course-open {
+  background-color: var(--primary);
+  color: #FFFFFF;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-md);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.btn-course-open:hover {
+  background-color: var(--primary-hover);
+}
+
+/* --------------------------------------------------------------------------
+   7. ЭКРАН 2: ДЕТАЛИЗАЦИЯ КУРСА
+   -------------------------------------------------------------------------- */
+.detail-header-block {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.detail-visual {
+  height: 12.5rem;
+  background: linear-gradient(135deg, #FEF08A 0%, #FED7AA 50%, #FDBA74 100%);
+  border-radius: var(--border-radius-lg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.btn-back-catalog {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--border-radius-md);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+}
+
+.detail-card {
+  background-color: var(--bg-card);
+  border: 0.0625rem solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+}
+
+.detail-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+
+.detail-sub {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+/* Визитка преподавателя */
+.teacher-box {
+  background-color: var(--bg-surface);
+  border: 0.0625rem solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.teacher-avatar {
+  font-size: 1.75rem;
+  background-color: #FFFFFF;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.teacher-name {
+  font-size: 0.95rem;
+  font-weight: 800;
+  margin-bottom: 0.2rem;
+}
+
+.teacher-bio {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Модули программы */
+.modules-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.module-card {
+  background-color: var(--bg-surface);
+  border-radius: var(--border-radius-md);
+  padding: 0.875rem 1rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.module-index {
+  background-color: var(--primary-light);
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 0.85rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.module-content h5 {
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.module-content p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Форма записи на пробный урок */
+.booking-card {
+  background-color: var(--bg-card);
+  border: 0.0625rem solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.booking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 0.0625rem solid var(--border-color);
+  padding-bottom: 0.75rem;
+}
+
+.booking-cost {
+  font-size: 1.75rem;
+  font-weight: 800;
+}
+
+.trial-badge {
+  background-color: var(--success-light);
+  color: var(--success);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--border-radius-sm);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.field-input {
+  padding: 0.75rem;
+  border: 0.0625rem solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  font-size: 0.875rem;
+  background-color: var(--bg-surface);
+}
+
+.btn-book-submit {
+  background: linear-gradient(135deg, var(--primary) 0%, #7C3AED 100%);
+  color: #FFFFFF;
+  padding: 0.875rem;
+  border-radius: var(--border-radius-md);
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-fast);
+}
+
+.btn-book-submit:hover {
+  transform: translateY(-0.1rem);
+}
+
+/* --------------------------------------------------------------------------
+   8. ЭКРАН 3: ЛИЧНЫЙ КАБИНЕТ РОДИТЕЛЯ (РАСПИСАНИЕ И ПОРТФОЛИО)
+   -------------------------------------------------------------------------- */
+.profile-screen {
+  margin-top: 1rem;
+}
+
+.profile-user-card {
+  background-color: var(--bg-card);
+  border: 0.0625rem solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.profile-avatar {
+  width: 3rem;
+  height: 3rem;
+  background-color: #FEF3C7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.parent-name {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.parent-role {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Переключатель детей (чипсы) */
+.children-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.child-chip {
+  flex: 1;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--border-radius-md);
+  border: 0.0625rem solid var(--border-color);
+  background-color: var(--bg-card);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  text-align: center;
+  transition: all var(--transition-fast);
+}
+
+.child-chip.active {
+  background-color: var(--primary);
+  color: #FFFFFF;
+  border-color: var(--primary);
+}
+
+/* Карточка абонемента */
+.subscription-card {
+  background: linear-gradient(135deg, var(--primary) 0%, #6366F1 100%);
+  color: #FFFFFF;
+  border-radius: var(--border-radius-lg);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.sub-header {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+  margin-bottom: 0.25rem;
+}
+
+.sub-course-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.sub-progress {
+  font-size: 0.85rem;
+  margin-bottom: 0.875rem;
+}
+
+.btn-renew {
+  background-color: #FFFFFF;
+  color: var(--primary);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.75rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* Ближайший урок */
+.next-lesson-card {
+  background-color: var(--bg-card);
+  border: 0.0625rem solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.time-box {
+  background-color: #FEF3C7;
+  color: #92400E;
+  padding: 0.75rem 0.5rem;
+  border-radius: var(--border-radius-md);
+  text-align: center;
+  min-width: 4.5rem;
+}
+
+.time-val {
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.time-date {
+  font-size: 0.65rem;
+  font-weight: 700;
+  margin-top: 0.2rem;
+}
+
+.lesson-meta h4 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  margin-bottom: 0.2rem;
+}
+
+.lesson-meta p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Семейная галерея работ ребенка */
+.gallery-section h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.work-card {
+  background-color: var(--bg-card);
+  border: 0.0625rem solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.work-preview {
+  height: 5rem;
+  background-color: #FEE2E2;
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.work-name {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.work-upload-btn {
+  border: 0.125rem dashed #CBD5E1;
+  background-color: var(--bg-surface);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0.5rem;
+  cursor: pointer;
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   9. ПОДВАЛ САЙТА (<footer>)
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background-color: #0F172A;
+  color: #94A3B8;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin-top: auto;
+  font-size: 0.8rem;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+}
+
+/* ==========================================================================
+   10. МЕДИА-ЗАПРОСЫ (MEDIA QUERIES): ПЛАНШЕТЫ И ДЕСКТОПЫ (MOBILE FIRST)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   A. ПЛАНШЕТЫ (min-width: 48rem / 768px)
+   -------------------------------------------------------------------------- */
+@media screen and (min-width: 48rem) {
+  body {
+    padding-bottom: 0; /* Убираем мобильный отступ под таббар */
+  }
+
+  .mobile-tabbar {
+    display: none; /* Скрываем мобильный таббар на экранах шире 768px */
+  }
+
+  .desktop-nav {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .nav-item-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--border-radius-sm);
+    transition: all var(--transition-fast);
+    cursor: pointer;
+  }
+
+  .nav-item-link.active, .nav-item-link:hover {
+    color: var(--primary);
+    background-color: var(--primary-light);
+  }
+
+  .btn-header-cta {
+    display: inline-flex;
+    background-color: var(--primary);
+    color: #FFFFFF;
+    padding: 0.6rem 1.1rem;
+    border-radius: var(--border-radius-md);
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .btn-burger {
+    display: none;
+  }
+
+  /* Промо-баннер на планшетах */
+  .promo-card {
+    padding: 2.25rem 2rem;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .promo-art-icon {
+    display: flex;
+    font-size: 6rem;
+    margin-right: 1rem;
+  }
+
+  /* Сетка курсов: 2 колонки на планшетах */
+  .courses-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .course-item {
+    flex: 1 1 calc(50% - 0.75rem);
+  }
+
+  /* Детализация курса: 2 колонки на планшетах */
+  .detail-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .detail-main-col {
+    flex: 1.6;
+  }
+
+  .detail-side-col {
+    flex: 1.1;
+    position: sticky;
+    top: 5rem;
+  }
+
+  /* Личный кабинет на планшетах */
+  .dashboard-layout {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .dashboard-left {
+    flex: 1.2;
+  }
+
+  .dashboard-right {
+    flex: 1;
+  }
+
+  .works-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer-content {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   B. ДЕСКТОПЫ (min-width: 64rem / 1024px)
+   -------------------------------------------------------------------------- */
+@media screen and (min-width: 64rem) {
+  /* Сетка курсов: 3 колонки на десктопе */
+  .course-item {
+    flex: 1 1 calc(33.333% - 0.85rem);
+  }
+
+  .promo-title {
+    font-size: 2.25rem;
+  }
+
+  .promo-art-icon {
+    font-size: 8rem;
+  }
+
+  .works-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

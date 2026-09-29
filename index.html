@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <!-- Обязательный метатег Viewport по требованиям лабораторной работы № 5 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Детская творческая школа «Арт-Умка» — Мобильное веб-приложение</title>
+  
+  <!-- 1. Сброс стилей: подключение normalize.css -->
+  <link rel="stylesheet" href="css/normalize.css">
+  
+  <!-- 2. Основные стили: архитектура Mobile First и Flexbox -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       ВЕРХНЯЯ ШАПКА (<header>) И НАВИГАЦИЯ (<nav>)
+       ======================================================================== -->
+  <header class="site-header">
+    <div class="container header-container">
+      <!-- Логотип школы -->
+      <a href="#" class="brand-link" data-target-screen="catalog">
+        <div class="brand-icon">🎨</div>
+        <div class="brand-info">
+          <span class="brand-title">Арт-Умка</span>
+          <span class="brand-subtitle">Творческая школа</span>
+        </div>
+      </a>
+
+      <!-- Навигация для планшетов и десктопа -->
+      <nav class="desktop-nav">
+        <a href="#" class="nav-item-link active" data-target-screen="catalog">Каталог курсов</a>
+        <a href="#" class="nav-item-link" data-target-screen="detail">Детализация курса</a>
+        <a href="#" class="nav-item-link" data-target-screen="profile">Личный кабинет</a>
+      </nav>
+
+      <!-- Действия в шапке -->
+      <div class="header-right">
+        <a href="#" class="btn-header-cta" data-target-screen="detail">Запись 0 BYN</a>
+        <button class="btn-burger" data-target-screen="profile" aria-label="Профиль пользователя">👤</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       ОСНОВНАЯ ЧАСТЬ С 3 ЛОГИЧЕСКИМИ ЭКРАНАМИ (<main>)
+       ======================================================================== -->
+  <main class="container">
+
+    <!-- ----------------------------------------------------------------------
+         ЭКРАН 1: ГЛАВНЫЙ ЭКРАН / КАТАЛОГ НАПРАВЛЕНИЙ
+         ---------------------------------------------------------------------- -->
+    <section id="screen-catalog" class="app-screen active-screen">
+      <!-- Промо-баннер с акцией недели -->
+      <div class="promo-hero">
+        <div class="promo-card">
+          <div class="promo-content">
+            <span class="promo-badge">🌟 Набор в группы 2026</span>
+            <h1 class="promo-title">Раскройте таланты вашего ребенка</h1>
+            <p class="promo-desc">Живопись, керамика, анимация и робототехника для детей от 4 до 16 лет в Минске. Профессиональные материалы уже включены!</p>
+            <div class="promo-actions">
+              <a href="#" class="btn-promo-main" data-target-screen="detail">Пробный урок 0 BYN →</a>
+            </div>
+          </div>
+          <div class="promo-art-icon">🎨</div>
+        </div>
+      </div>
+
+      <!-- Каталог курсов и фильтрация -->
+      <div class="catalog-section">
+        <div class="section-head">
+          <h2 class="section-heading">Программы обучения</h2>
+        </div>
+
+        <!-- Фильтры категорий (горизонтальный скролл на мобильных) -->
+        <div class="filter-scroll">
+          <button class="filter-btn active" data-category="all">Все направления</button>
+          <button class="filter-btn" data-category="art">🎨 Живопись</button>
+          <button class="filter-btn" data-category="pottery">🏺 Гончарный круг</button>
+          <button class="filter-btn" data-category="anim">🎬 Мультипликация</button>
+          <button class="filter-btn" data-category="robot">🤖 Роботы</button>
+        </div>
+
+        <!-- Сетка карточек на Flexbox -->
+        <div class="courses-grid" style="margin-top: 1rem;">
+          <!-- Курс 1: Живопись -->
+          <article class="course-item" data-category="art">
+            <div class="course-thumb">🎨</div>
+            <div class="course-body">
+              <div class="course-tags">
+                <span class="pill-tag pill-age">6–10 ЛЕТ</span>
+                <span class="pill-tag pill-rating">⭐ 4.9 (42)</span>
+              </div>
+              <h3 class="course-title">Акварельная сказка</h3>
+              <p class="course-desc">Живопись по-мокрому, пейзажи и создание авторской выставки картин.</p>
+              <div class="course-foot">
+                <div class="price-info">
+                  <span class="price-num">45 BYN</span>
+                  <span class="price-label">за 8 занятий / мес</span>
+                </div>
+                <button class="btn-course-open" data-target-screen="detail">Подробнее</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Курс 2: Гончарный круг -->
+          <article class="course-item" data-category="pottery">
+            <div class="course-thumb thumb-pottery">🏺</div>
+            <div class="course-body">
+              <div class="course-tags">
+                <span class="pill-tag pill-age">5–12 ЛЕТ</span>
+                <span class="pill-tag pill-rating">⭐ 5.0 (29)</span>
+              </div>
+              <h3 class="course-title">Гончарное ремесло</h3>
+              <p class="course-desc">Лепка на гончарном круге, роспись ангобами и муфельный обжиг посуды.</p>
+              <div class="course-foot">
+                <div class="price-info">
+                  <span class="price-num">50 BYN</span>
+                  <span class="price-label">за 8 занятий / мес</span>
+                </div>
+                <button class="btn-course-open" data-target-screen="detail">Подробнее</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Курс 3: Мультипликация -->
+          <article class="course-item" data-category="anim">
+            <div class="course-thumb thumb-anim">🎬</div>
+            <div class="course-body">
+              <div class="course-tags">
+                <span class="pill-tag pill-age">8–14 ЛЕТ</span>
+                <span class="pill-tag pill-rating">⭐ 4.8 (33)</span>
+              </div>
+              <h3 class="course-title">Stop-Motion Анимация</h3>
+              <p class="course-desc">Создание пластилиновых персонажей, озвучка и монтаж своего мультика.</p>
+              <div class="course-foot">
+                <div class="price-info">
+                  <span class="price-num">55 BYN</span>
+                  <span class="price-label">за 8 занятий / мес</span>
+                </div>
+                <button class="btn-course-open" data-target-screen="detail">Подробнее</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Курс 4: Робототехника -->
+          <article class="course-item" data-category="robot">
+            <div class="course-thumb thumb-robot">🤖</div>
+            <div class="course-body">
+              <div class="course-tags">
+                <span class="pill-tag pill-age">7–12 ЛЕТ</span>
+                <span class="pill-tag pill-rating">⭐ 4.9 (19)</span>
+              </div>
+              <h3 class="course-title">Арт-робототехника</h3>
+              <p class="course-desc">Сборка кинетических скульптур, светящихся открыток и роботов-художников.</p>
+              <div class="course-foot">
+                <div class="price-info">
+                  <span class="price-num">60 BYN</span>
+                  <span class="price-label">за 8 занятий / мес</span>
+                </div>
+                <button class="btn-course-open" data-target-screen="detail">Подробнее</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Курс 5: Театр -->
+          <article class="course-item" data-category="art">
+            <div class="course-thumb thumb-theater">🎭</div>
+            <div class="course-body">
+              <div class="course-tags">
+                <span class="pill-tag pill-age">4–9 ЛЕТ</span>
+                <span class="pill-tag pill-rating">⭐ 5.0 (40)</span>
+              </div>
+              <h3 class="course-title">Театр теней и кукол</h3>
+              <p class="course-desc">Создание персонажей, актерское мастерство и семейный спектакль.</p>
+              <div class="course-foot">
+                <div class="price-info">
+                  <span class="price-num">40 BYN</span>
+                  <span class="price-label">за 8 занятий / мес</span>
+                </div>
+                <button class="btn-course-open" data-target-screen="detail">Подробнее</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Курс 6: Скульптура -->
+          <article class="course-item" data-category="art">
+            <div class="course-thumb thumb-sculpt">🗿</div>
+            <div class="course-body">
+              <div class="course-tags">
+                <span class="pill-tag pill-age">5–11 ЛЕТ</span>
+                <span class="pill-tag pill-rating">⭐ 4.8 (22)</span>
+              </div>
+              <h3 class="course-title">Скульптура и рельеф</h3>
+              <p class="course-desc">Лепка из глины, воска и гипса. Развитие объемного мышления.</p>
+              <div class="course-foot">
+                <div class="price-info">
+                  <span class="price-num">48 BYN</span>
+                  <span class="price-label">за 8 занятий / мес</span>
+                </div>
+                <button class="btn-course-open" data-target-screen="detail">Подробнее</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------------------------------------------------------------
+         ЭКРАН 2: ДЕТАЛИЗАЦИЯ ПРОГРАММЫ КУРСА
+         ---------------------------------------------------------------------- -->
+    <section id="screen-detail" class="app-screen">
+      <div class="detail-header-block">
+        <div class="detail-visual">
+          🎨
+          <button class="btn-back-catalog" data-target-screen="catalog">← В каталог</button>
+        </div>
+      </div>
+
+      <div class="detail-layout">
+        <!-- Основная колонка с описанием курса -->
+        <div class="detail-main-col">
+          <article class="detail-card">
+            <h2 class="detail-title">Курс «Акварельная сказка»</h2>
+            <p class="detail-sub">Углубленный курс рисования для детей 6–10 лет. Ребенок овладеет тонкостями колористики, освоит технику акварели «по-мокрому» и напишет 8 готовых картин в рамах.</p>
+
+            <!-- Визитка педагога -->
+            <div class="teacher-box">
+              <div class="teacher-avatar">👩‍🎨</div>
+              <div>
+                <h4 class="teacher-name">Елена Васильева</h4>
+                <p class="teacher-bio">Член Союза художников, высшее педагогическое образование, опыт работы с детьми 9 лет.</p>
+              </div>
+            </div>
+
+            <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 0.5rem;">Программа занятий (3 модуля)</h3>
+            <div class="modules-container">
+              <div class="module-card">
+                <div class="module-index">1</div>
+                <div class="module-content">
+                  <h5>Цветовой круг и магия оттенков</h5>
+                  <p>Учимся смешивать краски, создавать плавные градиенты заката и северного сияния.</p>
+                </div>
+              </div>
+              <div class="module-card">
+                <div class="module-index">2</div>
+                <div class="module-content">
+                  <h5>Сказочные животные и фактуры</h5>
+                  <p>Передаем фактуру шерсти пушистого лисенка, рисуем сову в ночном лесу.</p>
+                </div>
+              </div>
+              <div class="module-card">
+                <div class="module-index">3</div>
+                <div class="module-content">
+                  <h5>Итоговая картина и вернисаж</h5>
+                  <p>Большая картина на хлопковом листе в раме. Семейная выставка и вручение дипломов.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Боковая колонка / форма записи (Sticky на планшетах и ПК) -->
+        <aside class="detail-side-col">
+          <div class="booking-card">
+            <div class="booking-header">
+              <div>
+                <span class="booking-cost">45 BYN</span>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">/ 8 уроков</span>
+              </div>
+              <span class="trial-badge">✓ Пробный: 0 BYN</span>
+            </div>
+
+            <form id="booking-form" style="display: flex; flex-direction: column; gap: 1rem;">
+              <div class="form-field">
+                <label class="field-label">Имя и возраст ребенка:</label>
+                <input type="text" id="child-name-input" class="field-input" placeholder="Например: София, 7 лет" required>
+              </div>
+              <div class="form-field">
+                <label class="field-label">Телефон родителя:</label>
+                <input type="tel" id="parent-phone-input" class="field-input" placeholder="+375 (29) 123-45-67" required>
+              </div>
+              <button type="submit" class="btn-book-submit">Записаться на пробный (0 BYN)</button>
+            </form>
+
+            <div style="font-size: 0.75rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.35rem;">
+              <div>📍 Минск, пр. Независимости, 14</div>
+              <div>🎨 Все профессиональные материалы включены</div>
+              <div>👥 Мини-группы до 8 детей</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ----------------------------------------------------------------------
+         ЭКРАН 3: ЛИЧНЫЙ КАБИНЕТ РОДИТЕЛЯ (РАСПИСАНИЕ И ПОРТФОЛИО)
+         ---------------------------------------------------------------------- -->
+    <section id="screen-profile" class="app-screen">
+      <div class="profile-screen">
+        <!-- Карточка родителя -->
+        <div class="profile-user-card">
+          <div class="profile-info">
+            <div class="profile-avatar">👩</div>
+            <div>
+              <h3 class="parent-name">Ольга Ковалева</h3>
+              <span class="parent-role">Родитель учеников</span>
+            </div>
+          </div>
+          <button class="btn-course-open" style="background: var(--bg-surface); color: var(--text-primary);">Настройки</button>
+        </div>
+
+        <!-- Переключатель детей -->
+        <div class="children-tabs">
+          <button class="child-chip active" data-child-name="Софии (7 лет)">👧 София (7 лет)</button>
+          <button class="child-chip" data-child-name="Миши (5 лет)">👦 Миша (5 лет)</button>
+        </div>
+
+        <div class="dashboard-layout">
+          <!-- Левая часть: абонемент и расписание -->
+          <div class="dashboard-left">
+            <!-- Активный абонемент -->
+            <div class="subscription-card">
+              <div class="sub-header">АКТИВНЫЙ АБОНЕМЕНТ</div>
+              <div class="sub-course-title">Акварельная сказка</div>
+              <div class="sub-progress">Осталось: <strong>6 из 8</strong> занятий (до 28 сентября)</div>
+              <button class="btn-renew" onclick="alert('Переход к пополнению баланса абонемента на 45 BYN');">Продлить абонемент</button>
+            </div>
+
+            <!-- Ближайшее занятие -->
+            <div class="next-lesson-card">
+              <div class="time-box">
+                <div class="time-val">16:30</div>
+                <div class="time-date">ЗАВТРА</div>
+              </div>
+              <div class="lesson-meta">
+                <h4>Акварельная сказка</h4>
+                <p>📍 Аудитория 302 • Преп. Елена Васильева</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Правая часть: галерея работ ребенка -->
+          <div class="dashboard-right gallery-section">
+            <h3>Галерея работ <span id="current-child-name">Софии (7 лет)</span></h3>
+            <div class="works-grid">
+              <div class="work-card">
+                <div class="work-preview">🦊</div>
+                <div class="work-name">Осенний лис</div>
+              </div>
+              <div class="work-card">
+                <div class="work-preview" style="background-color: #E0E7FF;">🚀</div>
+                <div class="work-name">Космолет</div>
+              </div>
+              <div class="work-card">
+                <div class="work-preview" style="background-color: #FEF3C7;">🌻</div>
+                <div class="work-name">Подсолнухи</div>
+              </div>
+              <div class="work-upload-btn" onclick="alert('Выберите фото рисунка с камеры устройства');">
+                <span style="font-size: 1.5rem; line-height: 1;">+</span>
+                <span>Загрузить фото</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       ПОДВАЛ САЙТА (<footer>)
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>&copy; 2026 Детская творческая школа «Арт-Умка» • Минск</div>
+      <div>Лабораторная работа № 5: Верстка мобильно-ориентированного приложения (Mobile-First)</div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       НИЖНЯЯ МОБИЛЬНАЯ ПАНЕЛЬ НАВИГАЦИИ (TAB-BAR)
+       Отображается только на мобильных экранах (< 768px)
+       ======================================================================== -->
+  <nav class="mobile-tabbar" aria-label="Мобильная навигация">
+    <div class="tabbar-item active" data-target-screen="catalog">
+      <span class="tab-icon">🎨</span>
+      <span>Каталог</span>
+    </div>
+    <div class="tabbar-item" data-target-screen="detail">
+      <span class="tab-icon">📖</span>
+      <span>О курсе</span>
+    </div>
+    <div class="tabbar-item" data-target-screen="profile">
+      <span class="tab-icon">👤</span>
+      <span>Кабинет</span>
+    </div>
+  </nav>
+
+  <!-- Скрипты приложения -->
+  <script src="js/app.js"></script>
+</body>
+</html>
